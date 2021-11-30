@@ -42,3 +42,13 @@
 |開發部員工(RD-USER)| | | O | | |
 |財務部經理(FD-MANAGER)|O| O | O | |O |
 |財務部員工(FD-USER)| | | O | |O |
+
+部門經理
+財務部門會計可依會計五大類進行獨立作業
+![](https://github.com/4a7g0018/yan.erp/blob/master/images/FD_Account.gif)
+也可透過大表管理會計細項
+
+部門工作派遣(該部門管理員派遣該部門員工)
+![img.png](img.png)
+可透過滑動按鈕選擇是否發布與工作是否完成
+![img_1.png](img_1.png)
