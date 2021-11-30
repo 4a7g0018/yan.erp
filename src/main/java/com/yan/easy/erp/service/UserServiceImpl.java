@@ -46,12 +46,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             switch (role.toString()){
                 case "RD_MANAGER":
                     authorities.add(new SimpleGrantedAuthority("RD_USER"));
-                case "ACCOUNT_MANAGER":
-                    authorities.add(new SimpleGrantedAuthority("ACCOUNT_USER"));
+                case "FD_MANAGER":
+                    authorities.add(new SimpleGrantedAuthority("FD_USER"));
             }
-//            if (role.toString().contains("RD_MANAGER")){
-//                authorities.add(new SimpleGrantedAuthority("RD_USER"));
-//            }
+
             authorities.add(role);
 
             return new org.springframework.security.core.userdetails.User(users.getUserName(), users.getPassword(), authorities);

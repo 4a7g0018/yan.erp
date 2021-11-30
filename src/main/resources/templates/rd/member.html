@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>admin-index</title>
+    <title>RD Member</title>
     <link rel="stylesheet" type="text/css" href="/css/rd_index.css">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <style>
@@ -231,50 +231,91 @@
 <body>
 
 <div class="container">
-    <div class="navigation">
-        <ul>
-            <li onclick="pass_value()">
-                <a th:href="@{/rd/index}">
-                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
-                    <span class="title">Best ERP</span>
-                </a>
-            </li>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li onclick="pass_value()">
+                    <a th:href="@{/rd/index}">
+                        <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                        <span class="title">Best ERP</span>
+                    </a>
+                </li>
 
-            <li class="home" onclick="pass_value()">
-                <a th:href="@{/rd/home}" class="home-a">
-                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                    <span class="title">Home</span>
-                </a>
-            </li>
+                <li class="home" onclick="pass_value()">
+                    <a th:href="@{/rd/home}" class="home-a">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
 
-            <li class="new-page-1" onclick="pass_value()">
-                <a th:href="@{/rd/work_list}" class="new-page-1-a">
-                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                    <span class="title">work list</span>
-                </a>
-            </li>
+                <li class="new-page-1" onclick="pass_value()">
+                    <a th:href="@{/rd/work_list}" class="new-page-1-a">
+                        <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                        <span class="title">work list</span>
+                    </a>
+                </li>
 
-            <li class="new-page-2" onclick="pass_value()">
-                <a th:href="@{/rd/member}" class="new-page-2-a">
-                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
-                    <span class="title">member</span>
-                </a>
-            </li>
+                <li class="new-page-2" onclick="pass_value()">
+                    <a th:href="@{/rd/member}" class="new-page-2-a">
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></ion-icon></span>
+                        <span class="title">member</span>
+                    </a>
+                </li>
 
-            <li class="food" onclick="pass_value()">
-                <a th:href="@{/rd/food}" class="food-a">
-                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
-                    <span class="title">food</span>
-                </a>
-            </li>
+                <li class="food" onclick="pass_value()">
+                    <a th:href="@{/rd/food}" class="food-a">
+                        <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                        <span class="title">food</span>
+                    </a>
+                </li>
 
-            <li class="logout">
-                <a th:href="@{/logout}" class="logout">
-                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-                    <span class="title">logout</span>
-                </a>
-            </li>
-        </ul>
+                <li class="logout">
+                    <a th:href="@{/logout}" class="logout">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title">logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="topbar">
+                <div class="bar-toggle">
+                    <ion-icon name="list-outline"></ion-icon>
+                </div>
+                <!--search-->
+                <!--                <div class="search">-->
+                <!--                    <label>-->
+                <!--                        <input type="text" placeholder="accounting">-->
+
+                <!--                    </label>-->
+                <!--                    <div class="search-icon">-->
+                <!--                        <ion-icon name="search-outline"></ion-icon>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+                <!-- users-->
+                <div class="users">
+                    <img th:src="*{headShot}">
+                </div>
+            </div>
+
+            <div class="page-center">
+                <div class="center-box">
+                    <h1>公告欄</h1>
+                    <!--                <span th:if="${pass}" th:text="pass"></span>-->
+                    <!--                <span th:if="${no}" th:text="pass"></span>-->
+                    <!--                <button th:if="${pass}">pass</button>-->
+                    <!--                <button th:if="${no}">pass</button>-->
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showDate=1&showNav=1&showTitle=0&showPrint=0&showCalendars=0&showTz=0&showTabs=0&src=YmVzdC5lcnAueWFuQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
+                            style="border-width:0" width="80%" height="80%" frameborder="0" scrolling="no"></iframe>
+                    <!--<form th:action="@{/button}" method="post" th:object="${users}">-->
+                    <!--                    <input type="text" th:placeholder="${users.getUserName()}">-->
+                    <!--                    <button type="submit" >test</button>-->
+                    <!--                </form>-->
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="main">

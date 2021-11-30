@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>admin-home</title>
+    <title>RD Home</title>
     <link rel="stylesheet" type="text/css" href="/css/rd_index.css">
     <link rel="stylesheet" type="text/css" href="/css/rd_home.css">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -38,7 +38,7 @@
 
                 <li class="new-page-2" onclick="pass_value()">
                     <a th:href="@{/rd/member}" class="new-page-2-a">
-                        <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></ion-icon></span>
                         <span class="title">member</span>
                     </a>
                 </li>
@@ -132,14 +132,6 @@
                     <div style="display: flex">
                         <div style="width: 43vw;height:75vh; border: 3px solid #999999;margin-right: 1%;border-radius: 10px">
                             <div id="bulletin_board" style="width: 100%; height: 100%;padding: 5px;overflow: auto">
-                                <!--                                <table>-->
-                                <!--                                    <thead onclick="shows()">-->
-                                <!--                                    <th>123</th>-->
-                                <!--                                    <th>123</th>-->
-                                <!--                                    <th>123</th>-->
-                                <!--                                    </thead>-->
-                                <!--                                </table>-->
-                                <!--                                <div class="bbbox"></div>-->
 
                             </div>
                         </div>
@@ -198,13 +190,12 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
-<script src="/js/content_page_rd.js"></script>
+
 <script src="/js/rd/rd_home_config.js"></script>
+<script src="/js/rd/rd_index_hover.js"></script>
 <script src="/js/rd/rd_home_manager.js"></script>
 <script src="/js/rd/rd_home_user.js"></script>
 <script>
-
-
 
     $.ajax({
         type:'GET',
@@ -302,7 +293,6 @@
             console.log(error)
         }
     })
-
 
 </script>
 </body>

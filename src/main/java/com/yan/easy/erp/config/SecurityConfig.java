@@ -52,21 +52,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/admin/upload").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/admin/new-page-1/work_list/edit").hasAuthority("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "/gm/**").hasAuthority("GENNERAL_MANAGER")
-                .antMatchers(HttpMethod.POST, "/gm/**").hasAuthority("GENNERAL_MANAGER")
+                .antMatchers(HttpMethod.GET, "/gm/**").hasAuthority("GENERAL_MANAGER")
+                .antMatchers(HttpMethod.POST, "/gm/**").hasAuthority("GENERAL_MANAGER")
 
                 .antMatchers(HttpMethod.GET, "/rd/**").hasAuthority("RD_USER")
                 .antMatchers(HttpMethod.POST, "/rd/**").hasAuthority("RD_MANAGER")
 
-                .antMatchers(HttpMethod.GET, "/account/**").hasAuthority("ACCOUNT_USER")
-                .antMatchers(HttpMethod.POST, "/account/**").hasAuthority("ACCOUNT_MANAGER")
+                .antMatchers(HttpMethod.GET, "/account/**").hasAuthority("FD_USER")
+                .antMatchers(HttpMethod.POST, "/account/**").hasAuthority("FD_MANAGER")
 
                 .antMatchers(HttpMethod.GET, "/hr/**").hasAuthority("HR_USER")
                 .antMatchers(HttpMethod.POST, "/hr/**").hasAuthority("HR_MANAGER")
 
-
                 .antMatchers(HttpMethod.GET).permitAll()
-
                 .and()
                 .formLogin()
                 .and()

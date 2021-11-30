@@ -36,16 +36,14 @@ public class MainController {
 
 
                 switch (userRoleServiceImpl.findUserRoleByUsersId(users.getId()).getRoles().getName()) {
-                    case "GENNERAL_MANAGER" :
-                        return "gm/home";
-//                    case "GENNERAL_MANAGER":
-//                        return "admin/index";
-//
-                    case "ACCOUNT_MANAGER":
-                        return "account/home";
+                    case "GENERAL_MANAGER" :
+                        return "gm/index";
 
-                    case "ACCOUNT_USER":
-                        return "account/home";
+                    case "FD_MANAGER":
+                        return "fd/home";
+
+                    case "FD_USER":
+                        return "fd/home";
 
                     case "RD_MANAGER":
                         return "rd/home";

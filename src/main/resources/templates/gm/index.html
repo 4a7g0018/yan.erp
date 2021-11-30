@@ -2,8 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>admin-index</title>
+    <title>GM Index</title>
     <link rel="stylesheet" type="text/css" href="/css/gm_index.css">
+    <link rel="stylesheet" type="text/css" href="/css/rd_home.css">
 <!--    <link rel="stylesheet" type="text/css" th:href="@{src/main/resources/static/css/admin/gm_index.css}">-->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -46,7 +47,7 @@
 
             <li class="new-page-2" onclick="pass_value()">
                 <a th:href="@{/gm/member}" class="new-page-2-a">
-                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                     <span class="title">member</span>
                 </a>
             </li>
@@ -91,22 +92,67 @@
 
         <div class="page-center">
             <div class="center-box">
-                <h1>公告欄</h1>
-<!--                <span th:if="${pass}" th:text="pass"></span>-->
-<!--                <span th:if="${no}" th:text="pass"></span>-->
-<!--                <button th:if="${pass}">pass</button>-->
-<!--                <button th:if="${no}">pass</button>-->
-                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showDate=1&showNav=1&showTitle=0&showPrint=0&showCalendars=0&showTz=0&showTabs=0&src=YmVzdC5lcnAueWFuQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043" style="border-width:0" width="80%" height="80%" frameborder="0" scrolling="no"></iframe>
-                <!--<form th:action="@{/button}" method="post" th:object="${users}">-->
-<!--                    <input type="text" th:placeholder="${users.getUserName()}">-->
-<!--                    <button type="submit" >test</button>-->
-<!--                </form>-->
+                <div style="overflow: auto;padding: 10px">
+                    <div style="text-align: center; margin-bottom: 1%">
+                        <h1>公告欄</h1>
+                        <div id="add_bulletin_board_btn"></div>
+                        <!--                        <input type="button" value="新增公告">-->
+                    </div>
+                    <div style="display: flex">
+                        <div style="width: 70vw;height:70vh; border: 3px solid #999999;margin-right: 1%;border-radius: 10px">
+                            <div id="bulletin_board" style="width: 100%; height: 100%;padding: 5px;overflow: auto">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
+<div>
+    <!--    <form th:action="@{/admin/new-page-2/save}" method="post" th:object="${addUser}">-->
+    <!--        <input id="id" type="hidden" th:field="*{id}">-->
+    <div class="cover">
+        <div class="cover-center">
+            <div style="margin-top: 10px;padding:0 100px">
+                <input type="hidden" id="id">
+                <div class="cover_table_jub_title">
+                    <label class="cover_table_label">Title :</label>
+                    <input id="job_title" class="cover_table_input abc" type="text" placeholder="job title">
+                </div>
 
+                <div class="cover_table_priority">
+                    <label class="cover_table_label">Priority :</label>
+                    <input id="priority" type="text" class="cover_table_select abc" readonly="readonly">
+                </div>
+
+                <div class="cover_table_date">
+                    <label class="cover_table_label">Date:</label>
+                    <input id="date" class="cover_table_input abc" type="date">
+                </div>
+
+                <div class="cover_table_illustrate">
+                    <label class="cover_table_label">Center:</label>
+                    <textarea id="illustrate" class="cover_table_input_illustrate abc"></textarea>
+                </div>
+
+                <div class="cover_table_button">
+                    <button type="submit" class="cover_table_button_save" onclick="upload_work_list()">save</button>
+                    <button type="button" class="cover_table_button_back" onclick="clear_add_bulletin_board()">back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    </form>-->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/rd/rd_home_config.js"></script>
+<script src="/js/gm/gm_index.js"></script>
 <script>
     let home_click = '';
     let accounting_click = '';
@@ -218,6 +264,10 @@
         window.sessionStorage.setItem("food_click", food_click);
         //new page--
     }
+
+    $(function (){
+        show_GM_index();
+    })
 </script>
 </body>
 </html>

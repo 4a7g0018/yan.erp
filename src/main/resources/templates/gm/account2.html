@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>new-page-1</title>
+    <title>GM Account</title>
     <link rel="stylesheet" type="text/css" href="/css/gm_index.css">
     <link rel="stylesheet" type="text/css" href="/css/checkbox.css">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -31,7 +31,7 @@
         .account-box-item {
             display: flex;
             flex: 0 0 32%;
-            background: #B0B0B0;
+            background: #B3CCCC;
             width: 33%;
             height: 49%;
             margin: 0 15px 15px 0;
@@ -52,7 +52,7 @@
         .account-box-item:hover{
             cursor: pointer;
             transition: 0.5s;
-            background: #999999;
+            background: #46A697;
             font-size: 18px;
         }
 
@@ -72,7 +72,9 @@
         }
 
         td{
-            /*border: #999999;*/
+            border-top: #ABA5A4 solid 2px;
+            line-height: 30px;
+            font-weight: 600;
         }
     </style>
 
@@ -80,7 +82,6 @@
 
 
 <body>
-
 <div class="container">
     <div class="navigation">
         <ul>
@@ -116,7 +117,7 @@
 
             <li class="new-page-2" onclick="pass_value()">
                 <a th:href="@{/gm/member}" class="new-page-2-a">
-                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                     <span class="title">member</span>
                 </a>
             </li>

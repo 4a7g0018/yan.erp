@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @SpringBootTest
 public class RoleRepositoryTest {
 
@@ -24,12 +29,6 @@ public class RoleRepositoryTest {
 
     @Test
     public void testCreateRole(){
-//        Roles admin=new Roles("ADMIN");
-//        rolesServiceImpl.saveRoles(admin);
-//
-//        Roles userRole =new Roles("USER_ROLE");
-//        rolesServiceImpl.saveRoles(userRole);
-
         for (Enum role : RolesList.class.getEnumConstants()){
             Roles roles = new Roles(role.toString());
             rolesServiceImpl.saveRoles(roles);
@@ -38,19 +37,31 @@ public class RoleRepositoryTest {
 
     @Test
     public void testAddRoleToUser(){
+        List<String> user_list = new ArrayList<>();
+        user_list.add("GENERAL_MANAGER");
+        user_list.add("HR_MANAGER");
+        user_list.add("HR_USER");
+        user_list.add("RD_MANAGER");
+        user_list.add("RD_USER");
+        user_list.add("FD_MANAGER");
+        user_list.add("FD_USER");
 
-        Users users=userServiceImpl.findUserByUserId(9L);
+        for (String user :user_list){
+            Users users=userServiceImpl.findByUserName(user);
+            Roles roles=rolesServiceImpl.findRolesByName(user);
+            UserRole userRole=new UserRole(users,roles);
+            userRoleServiceImpl.saveUserRole(userRole);
+        }
+    }
 
-//        Roles roles=rolesServiceImpl.findRolesByName(RolesList.GENNERAL_MANAGER.name());
-//        Roles roles=rolesServiceImpl.findRolesByName(RolesList.ACCOUNT_MANAGER.name());
-//        Roles roles=rolesServiceImpl.findRolesByName(RolesList.ACCOUNT_USER.name());
-//        Roles roles=rolesServiceImpl.findRolesByName(RolesList.RD_MANAGER.name());
-//        Roles roles=rolesServiceImpl.findRolesByName(RolesList.RD_USER.name());
-//        Roles roles=rolesServiceImpl.findRolesByName(RolesList.HR_MANAGER.name());
-//        Roles roles=rolesServiceImpl.findRolesByName(RolesList.HR_USER.name());
-        Roles roles=rolesServiceImpl.findRolesByName("USER_ROLE");
-        UserRole userRole=new UserRole(users,roles);
+    @Test
+    public void testdsa() {
+
+        Users users = userServiceImpl.findByUserName("test");
+        Roles roles = rolesServiceImpl.findRolesByName("GENERAL_MANAGER");
+        UserRole userRole = new UserRole(users, roles);
         userRoleServiceImpl.saveUserRole(userRole);
+
     }
 
     @Test
