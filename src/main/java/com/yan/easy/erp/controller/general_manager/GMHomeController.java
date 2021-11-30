@@ -1,6 +1,8 @@
 package com.yan.easy.erp.controller.general_manager;
 
 import com.yan.easy.erp.model.HomeData;
+import com.yan.easy.erp.model.Roles;
+import com.yan.easy.erp.model.WorkList;
 import com.yan.easy.erp.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,4 +97,74 @@ public class GMHomeController {
         return ResponseEntity.ok().body(homeData);
     }
 
+    @GetMapping("get_work_data")
+    public ResponseEntity<?> getWorkData() {
+
+        List<List<String>> doneWork = workListService.findAllDoneWorkTimes();
+        List<List<String>> undoneWork = workListService.findAllUndoneWorkTimes();
+        for (int i=0 ; i<5 ; i++){
+            try{
+                Objects.equals(doneWork.get(i).get(0), String.valueOf(i+1));
+            }catch (Exception e){
+                List<String> doneLostList =new ArrayList<>();
+                doneLostList.add(String.valueOf(i+1));
+                doneLostList.add("0");
+                doneWork.add(i,doneLostList);
+            }
+        }
+        System.out.println("-------------------------------");
+        System.out.println("doneWork:"+doneWork);
+        System.out.println("undoneWork:"+undoneWork);
+        for(int j=0 ; j<5 ; j++){
+            try{
+                if(!Objects.equals(undoneWork.get(j).get(0), String.valueOf(j+1))){
+                    List<String> undoneLostList =new ArrayList<>();
+                    undoneLostList.add(String.valueOf(j+1));
+                    undoneLostList.add("0");
+                    undoneWork.add(j,undoneLostList);
+                }
+
+            }catch (Exception e){
+                System.out.println(j);
+                List<String> undoneLostList =new ArrayList<>();
+                undoneLostList.add(String.valueOf(j+1));
+                undoneLostList.add("0");
+                undoneWork.add(j,undoneLostList);
+            }
+        }
+        System.out.println("-------------------------------");
+        System.out.println("doneWork:"+doneWork);
+        System.out.println("undoneWork:"+undoneWork);
+
+        List<String> workPriority = new ArrayList<>();
+//        List<Integer> formatDoneWork = new ArrayList<>();
+//        List<Integer> formatUndoneWork = new ArrayList<>();
+
+        Map<String,Integer>  formatDoneWork =new HashMap<>();
+        Map<String,Integer> formatUndoneWork = new HashMap<>();
+        for (int priority = 0; priority < 5; priority++) {
+            try {
+                workPriority.add(doneWork.get(priority).get(0));
+            } catch (Exception e) {
+                workPriority.add(String.valueOf(priority));
+            }
+
+            try {
+                formatDoneWork.put(String.valueOf(priority),Integer.valueOf(doneWork.get(priority).get(1)));
+            } catch (Exception e) {
+                formatDoneWork.put(String.valueOf(priority),0);
+            }
+
+            try {
+                formatUndoneWork.put(String.valueOf(priority),Integer.valueOf(undoneWork.get(priority).get(1)));
+            } catch (Exception e) {
+                formatUndoneWork.put(String.valueOf(priority),0);
+            }
+        }
+        HomeData homeData =new HomeData(formatDoneWork,formatUndoneWork);
+        System.out.println("-------------------------------");
+        System.out.println("formatDoneWork:"+formatDoneWork);
+        System.out.println("formatUndoneWork:"+formatUndoneWork);
+        return ResponseEntity.ok(homeData);
+    }
 }

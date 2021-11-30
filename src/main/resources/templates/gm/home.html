@@ -278,54 +278,55 @@
             // pei_chart.setOption(pei_chart_option);
             // pei_chart.setOption(time_out);
 
-            var work_bar_graph = document.getElementById('work-bar-graph');
-            var myChart = echarts.init(work_bar_graph);
-            var option;
 
-            option = {
-                title: {
-                    text: '工作進度總表'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'shadow'
-                    }
-                },
-                legend: {},
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: {
-                    type: 'value',
-                    boundaryGap: [0, 0.01]
-                },
-                yAxis: {
-                    type: 'category',
-                    data: work_priority
-                },
-                series: [
-                    {
-                        name: '未完成',
-                        type: 'bar',
-                        data: work_done
-                    },
-                    {
-                        name: '完成',
-                        type: 'bar',
-                        data: work_undone
-                    }
-                ]
-            };
-
-            option && myChart.setOption(option);
-
-        },
-        error:function (error){
-            console.log(error)
+    //         var work_bar_graph = document.getElementById('work-bar-graph');
+    //         var myChart = echarts.init(work_bar_graph);
+    //         var option;
+    //
+    //         option = {
+    //             title: {
+    //                 text: '工作進度總表'
+    //             },
+    //             tooltip: {
+    //                 trigger: 'axis',
+    //                 axisPointer: {
+    //                     type: 'shadow'
+    //                 }
+    //             },
+    //             legend: {},
+    //             grid: {
+    //                 left: '3%',
+    //                 right: '4%',
+    //                 bottom: '3%',
+    //                 containLabel: true
+    //             },
+    //             xAxis: {
+    //                 type: 'value',
+    //                 boundaryGap: [0, 0.01]
+    //             },
+    //             yAxis: {
+    //                 type: 'category',
+    //                 data: work_priority
+    //             },
+    //             series: [
+    //                 {
+    //                     name: '未完成',
+    //                     type: 'bar',
+    //                     data: work_done
+    //                 },
+    //                 {
+    //                     name: '完成',
+    //                     type: 'bar',
+    //                     data: work_undone
+    //                 }
+    //             ]
+    //         };
+    //
+    //         option && myChart.setOption(option);
+    //
+    //     },
+    //     error:function (error){
+    //         console.log(error)
         }
     })
 
@@ -427,6 +428,90 @@
     };
 
     option2 && chart.setOption(option2);
+
+    $.ajax({
+            type: 'GET',
+            url: '/gm/home/get_work_data',
+            async: true,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data)
+
+                // let work_priority = JSON.parse(JSON.stringify(data))['workPriority'];
+                let work_done = JSON.parse(JSON.stringify(data))['doneWorkMap'];
+                let work_undone = JSON.parse(JSON.stringify(data))['undoneWorkMap'];
+
+                // console.log(work_priority)
+                console.log(work_done)
+                console.log(work_undone)
+
+
+
+                // pei_chart.setOption(pei_chart_option);
+                // pei_chart.setOption(time_out);
+
+                var work_bar_graph = document.getElementById('work-bar-graph');
+                var myChart = echarts.init(work_bar_graph);
+                var option;
+
+                let work_priority=[]
+                let work_done_list = [];
+                let work_undone_list = [];
+                for(let priority in work_done){
+                    console.log(typeof priority)
+                    let n =parseInt(priority,10) + 1
+                    work_priority.push(n);
+                    work_done_list.push(work_done[priority]);
+                    work_undone_list.push(work_undone[priority]);
+                }
+                option = {
+                    title: {
+                        text: '工作進度總表'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    legend: {},
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 1]
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: work_priority
+                    },
+                    series: [
+                        {
+                            name: '未完成',
+                            type: 'bar',
+                            data: work_undone_list
+                        },
+                        {
+                            name: '完成',
+                            type: 'bar',
+                            data: work_done_list
+                        }
+                    ]
+                };
+
+                option && myChart.setOption(option)
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        }
+    )
 
 
 </script>
