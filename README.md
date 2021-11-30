@@ -52,14 +52,13 @@ _底下有詳細說明_
 
 ####部門經理-以財務部門為例
 可從首頁一覽該部門工作完成度與新增、觀看公告(部門經理、員工只能看見該部門公告與總經理公告，只有總經理有權限跨部門查看)
-![]()
+ - ![](https://github.com/4a7g0018/yan.erp/blob/master/images/FD_Home.gif)
 
 財務部門會計可依會計五大類進行獨立作業，也可透過大表一次性管理所有科目。
-![](https://github.com/4a7g0018/yan.erp/blob/master/images/FD_Account.gif)
+ - ![](https://github.com/4a7g0018/yan.erp/blob/master/images/FD_account.gif)
 
 部門工作派遣，派遣完畢後可透過滑動按鈕選擇是否發布與工作是否完成(該部門管理員派遣該部門員工，只有總經理有權限跨部門派遣)
-![]()
+ - ![](https://github.com/4a7g0018/yan.erp/blob/master/images/FD_Work.gif)
 
 部門員工查看，該部門只能查看該部門員工聯絡資料，但無法進行修改(只有總經理與人資部有權限進行人資管理)
-
-![]()
+ - ![](https://github.com/4a7g0018/yan.erp/blob/master/images/FD_Member.gif)
