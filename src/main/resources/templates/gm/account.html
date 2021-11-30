@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin-accounting</title>
+    <link rel="stylesheet" type="text/css" href="/css/gm_index.css">
+    <link rel="stylesheet" type="text/css" href="/css/gm_account.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="@{/gm/index}">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="@{/gm/home}" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="accounting" onclick="pass_value()">
+                <a th:href="@{/gm/account}" class="accounting-a">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon>
+                        </ion-icon></span>
+                    <span class="title">accounting</span>
+
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="@{/gm/work_list}" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">work list</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="@{/gm/member}" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="title">member</span>
+                </a>
+            </li>
+
+            <li class="food" onclick="pass_value()">
+                <a th:href="@{/gm/food}" class="food-a">
+                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                    <span class="title">food</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <div class="users">
+                <img th:src="*{headShot}">
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box">
+                <!--                <h1>accounting page</h1>-->
+                <div style="width: 100%;height: 100%;padding: 15px;overflow: auto;">
+                    <div style="margin-bottom: 15px">
+                    <div style="display: flex;width: 100%;height: 30%;">
+                        <!--                        <div class="box-assets" style="padding: 5px 10px 5px 10px;width: 300px;height: 200px;background: rosybrown;border-right: 4px solid white;border-radius: 30px">-->
+                        <div class="box-assets" onclick="show_assets_page()">
+                            <div style="height: 100%;width:100%;overflow: auto">
+                                <div>
+                                    <h1>資產類</h1>
+                                    <div style="width: 100%; display: flex;justify-content: center;">
+
+                                        <table>
+                                            <thead>
+                                            <th style="width: 250px">Name</th>
+                                            <th style="width: 250px;">time</th>
+                                            <th style="width: 150px;">Amount</th>
+                                            </thead>
+                                            <tbody>
+                                            <th:block th:each="asset : ${assetsList}">
+                                                <tr>
+                                                    <td style="text-align: left">[[${asset.accountName}]]</td>
+                                                    <td>[[${asset.time}]]</td>
+                                                    <td style="text-align: right;">[[${asset.amount}]]</td>
+                                                </tr>
+                                            </th:block>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-assets" onclick="show_liabilities()">
+                            <div style="height: 100%;width:100%;overflow: auto">
+                                <div>
+                                    <h1>負債類</h1>
+                                    <div style="width: 100%; display: flex;justify-content: center;">
+
+<!--                                        <table>-->
+<!--                                            <thead>-->
+<!--                                            <th style="width: 250px">Name</th>-->
+<!--                                            <th style="width: 250px;">time</th>-->
+<!--                                            <th style="width: 150px;">Amount</th>-->
+<!--                                            </thead>-->
+<!--                                            <tbody>-->
+<!--                                            <th:block th:each="liabilities : ${liabilitiesList}">-->
+<!--                                                <tr>-->
+<!--                                                    <td style="text-align: left">[[${liabilities.accountName}]]</td>-->
+<!--                                                    <td>[[${liabilities.time}]]</td>-->
+<!--                                                    <td style="text-align: right;">[[${liabilities.amount}]]</td>-->
+<!--                                                </tr>-->
+<!--                                            </th:block>-->
+<!--                                            </tbody>-->
+<!--                                        </table>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-assets" onclick="show_owners_equity()">
+                            <div style="height: 100%;width:100%;overflow: auto">
+                                <div>
+                                    <h1>權益類</h1>
+                                    <div style="width: 100%; display: flex;justify-content: center;">
+
+<!--                                        <table>-->
+<!--                                            <thead>-->
+<!--                                            <th style="width: 250px">Name</th>-->
+<!--                                            <th style="width: 250px;">time</th>-->
+<!--                                            <th style="width: 150px;">Amount</th>-->
+<!--                                            </thead>-->
+<!--                                            <tbody>-->
+<!--                                            <th:block th:each="ownersEquity : ${ownersEquityList}">-->
+<!--                                                <tr>-->
+<!--                                                    <td style="text-align: left">[[${ownersEquity.accountName}]]</td>-->
+<!--                                                    <td>[[${ownersEquity.time}]]</td>-->
+<!--                                                    <td style="text-align: right;">[[${ownersEquity.amount}]]</td>-->
+<!--                                                </tr>-->
+<!--                                            </th:block>-->
+<!--                                            </tbody>-->
+<!--                                        </table>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div>
+                    <div style="display: flex;width: 100%;height: 30%;">
+                        <!--                        <div class="box-assets" style="padding: 5px 10px 5px 10px;width: 300px;height: 200px;background: rosybrown;border-right: 4px solid white;border-radius: 30px">-->
+                        <div class="box-assets" onclick="show_revenue_page()">
+                            <div style="height: 100%;width:100%;overflow: auto">
+                                <div>
+                                    <h1>收益類</h1>
+                                    <div style="width: 100%; display: flex;justify-content: center;">
+
+<!--                                        <table>-->
+<!--                                            <thead>-->
+<!--                                            <th style="width: 250px">Name</th>-->
+<!--                                            <th style="width: 250px;">time</th>-->
+<!--                                            <th style="width: 150px;">Amount</th>-->
+<!--                                            </thead>-->
+<!--                                            <tbody>-->
+<!--                                            <th:block th:each="revenues : ${revenuesList}">-->
+<!--                                                <tr>-->
+<!--                                                    <td style="text-align: left">[[${revenues.accountName}]]</td>-->
+<!--                                                    <td>[[${revenues.time}]]</td>-->
+<!--                                                    <td style="text-align: right;">[[${revenues.amount}]]</td>-->
+<!--                                                </tr>-->
+<!--                                            </th:block>-->
+<!--                                            </tbody>-->
+<!--                                        </table>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-assets" onclick="show_expenses_page()">
+                            <div style="height: 100%;width:100%;overflow: auto">
+                                <div>
+                                    <h1>費損類</h1>
+                                    <div style="width: 100%; display: flex;justify-content: center;">
+
+<!--                                        <table>-->
+<!--                                            <thead>-->
+<!--                                            <th style="width: 250px">Name</th>-->
+<!--                                            <th style="width: 250px;">time</th>-->
+<!--                                            <th style="width: 150px;">Amount</th>-->
+<!--                                            </thead>-->
+<!--                                            <tbody>-->
+<!--                                            <th:block th:each="expenses : ${expensesList}">-->
+<!--                                                <tr>-->
+<!--                                                    <td style="text-align: left">[[${expenses.accountName}]]</td>-->
+<!--                                                    <td>[[${expenses.time}]]</td>-->
+<!--                                                    <td style="text-align: right;">[[${expenses.amount}]]</td>-->
+<!--                                                </tr>-->
+<!--                                            </th:block>-->
+<!--                                            </tbody>-->
+<!--                                        </table>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-all" onclick="show_assets_page()">
+                            <h1>All</h1>
+                        </div>
+
+<!--                        <div style="display: flex ;width:500px;height: 300px;">-->
+<!--                            <div class="box-all">-->
+<!--                                <div style="width: 100%;height: 100%;text-align: center;line-height: 300px">-->
+<!--                                    <h1>All</h1>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/content_page.js"></script>
+<script>
+    function show_assets_page() {
+        window.location.href = "/gm/account/assets"
+    }
+
+    function show_liabilities() {
+        window.location.href = "/gm/account/liabilities"
+    }
+
+    function show_owners_equity() {
+        window.location.href = "/gm/account/owners_equity"
+    }
+
+    function show_revenue_page() {
+        window.location.href = "/gm/account/revenue"
+    }
+
+    function show_expenses_page() {
+        window.location.href = "/gm/account/expenses"
+    }
+
+    function show_all_page() {
+        window.location.href = "/gm/account/all"
+    }
+
+    $.ajax({
+        type:'GET',
+        url:'/gm/account/get_assets',
+        async:true,
+        success:function (assets_data){
+            console.log(assets_data)
+        }
+
+    })
+</script>
+</body>
+</html>

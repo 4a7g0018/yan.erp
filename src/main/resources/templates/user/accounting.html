@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>users-accounting</title>
+    <link rel="stylesheet" type="text/css" href="/css/users/index.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="index">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="home" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="accounting" onclick="pass_value()">
+                <a th:href="accounting" class="accounting-a">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon>
+                        </ion-icon></span>
+                    <span class="title">accounting</span>
+
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="new-page-1" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">new_page_1</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="new-page-2" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="title">new_page_2</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a  th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <!--search-->
+            <!--                <div class="search">-->
+            <!--                    <label>-->
+            <!--                        <input type="text" placeholder="accounting">-->
+
+            <!--                    </label>-->
+            <!--                    <div class="search-icon">-->
+            <!--                        <ion-icon name="search-outline"></ion-icon>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!-- users-->
+            <div class="users">
+                <img th:src="*{headShot}" >
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box"><h1>accounting page</h1></div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/content_page.js"></script>
+</body>
+</html>

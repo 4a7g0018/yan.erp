@@ -1,0 +1,52 @@
+/**{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+.checkbox-container{
+}
+
+.checkbox-container label{
+
+    left: -30px;
+    top: -5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-container label input{
+    z-index: 999;
+    position: relative;
+    appearance: none;
+}
+
+.checkbox-container label span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 30px;
+    background: red;
+    border-radius: 40px;
+    transition: 0.5s;
+}
+
+.checkbox-container label input:checked ~ span{
+    background: chartreuse;
+}
+
+.checkbox-container label span i{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 3px;
+    transition: 0.5s;
+}
+
+.checkbox-container label input:checked ~ span i{
+    left: 31px;
+}

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>General Manager inde</title>
+    <link rel="stylesheet" type="text/css" href="/css/gm_index.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="@{/gm/index}">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="@{/gm/home}" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="accounting" onclick="pass_value()">
+                <a th:href="@{/gm/account}" class="accounting-a">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon>
+                        </ion-icon></span>
+                    <span class="title">accounting</span>
+
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="@{/gm/work_list}" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">work list</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="@{/gm/member}" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="person-add-outline"></ion-icon></span>
+                    <span class="title">member</span>
+                </a>
+            </li>
+
+            <li class="food" onclick="pass_value()">
+                <a th:href="@{/gm/food}" class="food-a">
+                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                    <span class="title">food</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <!--search-->
+            <!--                <div class="search">-->
+            <!--                    <label>-->
+            <!--                        <input type="text" placeholder="accounting">-->
+
+            <!--                    </label>-->
+            <!--                    <div class="search-icon">-->
+            <!--                        <ion-icon name="search-outline"></ion-icon>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!-- users-->
+            <div class="users">
+                <img th:src="*{headShot}">
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box">
+                <div style="overflow: auto;padding: 10px">
+                    <div style="text-align: center; margin-bottom: 1%">
+                        <h1>公司狀況總表</h1>
+                    </div>
+                    <div style="display: flex">
+<!--                        <div id="main2" style="width: 600px;height:400px;"></div>-->
+<!--                        <div id="main" style="width: 600px;height:600px;"></div>-->
+                        <div  style="width: 43vw;height:75vh; border: 3px solid #999999;margin-right: 1%;border-radius: 10px">
+                            <div id="account-pie" style="width: 100%; height: 100%;"></div>
+                        </div>
+                        <div style="width: 33vw;height:75vh;">
+                            <div id="work-bar-graph" style="width: 100%; height: 49%; border: 3px solid #999999;border-radius: 10px;margin-bottom: 2% "></div>
+                            <div id="area-chart" style="width: 100%; height: 49%; border: 3px solid #999999;border-radius: 10px "></div>
+                        </div>
+                    </div>
+
+<!--                    <div style="display: flex;width: 100%;">-->
+<!--                        <div style="width: 20%;height: 500px;background:#347B70;border-radius: 30px;margin: 5px"></div>-->
+<!--                        <div style="width: 20%;height: 500px;background:#8A8A8A;border-radius: 30px;margin: 5px"></div>-->
+<!--                        <div style="width: 20%;height: 500px;background:#aaaaaa;border-radius: 30px;margin: 5px"></div>-->
+<!--                        <div style="width: 20%;height: 500px;background:#8A8A8A;border-radius: 30px;margin: 5px"></div>-->
+<!--                        <div style="width: 20%;height: 500px;background:#347B70;border-radius: 30px;margin: 5px"></div>-->
+<!--                    </div>-->
+
+<!--                    <div style="display: flex">-->
+<!--                        <div style="width: 50%;height: 500px;background:#222222;border-radius: 30px;margin: 5px"></div>-->
+<!--                        <div style="width: 50%;height: 500px;background:#222222;border-radius: 30px;margin: 5px"></div>-->
+<!--                    </div>-->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script src="/js/content_page.js"></script>
+<script>
+    $.ajax({
+        type:'GET',
+        url:'/gm/home/data',
+        async:true,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        success:function (data){
+            console.log(data)
+            let years=JSON.parse(JSON.stringify(data))['years'];
+            let assets=JSON.parse(JSON.stringify(data))['sumAssets'];
+            let expenses=JSON.parse(JSON.stringify(data))['sumExpenses'];
+            let liabilities=JSON.parse(JSON.stringify(data))['sumLiabilities'];
+            let owners_equity=JSON.parse(JSON.stringify(data))['sumOwnersEquity'];
+            let revenues=JSON.parse(JSON.stringify(data))['sumRevenue'];
+
+            let work_priority=JSON.parse(JSON.stringify(data))['workPriority'];
+            let work_done=JSON.parse(JSON.stringify(data))['doneWork'];
+            let work_undone=JSON.parse(JSON.stringify(data))['undoneWork'];
+
+            console.log(work_priority)
+            console.log(work_done)
+            console.log(work_undone)
+
+            years.unshift('years')
+            assets.unshift('assets')
+            expenses.unshift('expenses')
+            liabilities.unshift('liabilities')
+            owners_equity.unshift('owners_equity')
+            revenues.unshift('revenues')
+
+            console.log(assets)
+
+            // let total=sum_assets+sum_expenses+sum_liabilities+sum_owners_equity+sum_revenue;
+            const labelOption={
+                fontSize:16
+            }
+            // function account_percentage(number){
+            //     if(number===0 || total===0){
+            //         return 0;
+            //     }
+            //     return (Math.round(number/total*10000)/100.0)
+            // }
+
+            var pei_chart = echarts.init(document.getElementById('account-pie'))
+            setTimeout(function () {
+                option = {
+                    title:{
+                        text:"會計總表"
+                    },
+                    legend: {},
+                    tooltip: {
+                        trigger: 'axis',
+                        showContent: false
+                    },
+                    dataset: {
+                        source: [
+                            // ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+                            // ['Milk Tea', 56.5, 82.1, 88.7, 70.1, 53.4, 85.1],
+                            // ['Matcha Latte', 51.1, 51.4, 55.1, 53.3, 73.8, 68.7],
+                            // ['Cheese Cocoa', 40.1, 62.2, 69.5, 36.4, 45.2, 32.5],
+                            // ['Walnut Brownie', 25.2, 37.1, 41.2, 18, 33.9, 49.1]
+                            years,
+                            assets,
+                            expenses,
+                            liabilities,
+                            owners_equity,
+                            revenues
+                        ]
+                    },
+                    xAxis: { type: 'category' },
+                    yAxis: { gridIndex: 0 },
+                    grid: { top: '55%' },
+                    series: [
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: { focus: 'series' }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: { focus: 'series' }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: { focus: 'series' }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: { focus: 'series' }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: { focus: 'series' }
+                        },
+                        {
+                            type: 'pie',
+                            id: 'pie',
+                            radius: '30%',
+                            center: ['50%', '25%'],
+                            emphasis: {
+                                focus: 'self'
+                            },
+                            label: {
+                                formatter: '{b}: {@2019} ({d}%)'
+                            },
+                            encode: {
+                                itemName: years,
+                                value: '2019',
+                                tooltip: '2019'
+                            }
+                        }
+                    ]
+                };
+                pei_chart.on('updateAxisPointer', function (event) {
+                    const xAxisInfo = event.axesInfo[0];
+                    if (xAxisInfo) {
+                        const dimension = xAxisInfo.value + 1;
+                        pei_chart.setOption({
+                            series: {
+                                id: 'pie',
+                                label: {
+                                    formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                                },
+                                encode: {
+                                    value: dimension,
+                                    tooltip: dimension
+                                }
+                            }
+                        });
+                    }
+                });
+                pei_chart.setOption(option);
+            });
+
+            // pei_chart.setOption(pei_chart_option);
+            // pei_chart.setOption(time_out);
+
+            var work_bar_graph = document.getElementById('work-bar-graph');
+            var myChart = echarts.init(work_bar_graph);
+            var option;
+
+            option = {
+                title: {
+                    text: '工作進度總表'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {},
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01]
+                },
+                yAxis: {
+                    type: 'category',
+                    data: work_priority
+                },
+                series: [
+                    {
+                        name: '未完成',
+                        type: 'bar',
+                        data: work_done
+                    },
+                    {
+                        name: '完成',
+                        type: 'bar',
+                        data: work_undone
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+
+        },
+        error:function (error){
+            console.log(error)
+        }
+    })
+
+
+    var area_chart = document.getElementById('area-chart');
+    var chart = echarts.init(area_chart);
+    var option2;
+
+    option2 = {
+        title: {
+            text: '財務分析表'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        // legend: {
+        //     data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+        // },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: 'Email',
+                type: 'line',
+                stack: 'Total',
+                areaStyle: {},
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name: 'Union Ads',
+                type: 'line',
+                stack: 'Total',
+                areaStyle: {},
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name: 'Video Ads',
+                type: 'line',
+                stack: 'Total',
+                areaStyle: {},
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name: 'Direct',
+                type: 'line',
+                stack: 'Total',
+                areaStyle: {},
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                name: 'Search Engine',
+                type: 'line',
+                stack: 'Total',
+                label: {
+                    show: true,
+                    position: 'top'
+                },
+                areaStyle: {},
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [820, 932, 901, 934, 1290, 1330, 1320]
+            }
+        ]
+    };
+
+    option2 && chart.setOption(option2);
+
+
+</script>
+</body>
+</html>

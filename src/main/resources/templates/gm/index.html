@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin-index</title>
+    <link rel="stylesheet" type="text/css" href="/css/gm_index.css">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{src/main/resources/static/css/admin/gm_index.css}">-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="@{/gm/index}">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="@{/gm/home}" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="accounting" onclick="pass_value()">
+                <a th:href="@{/gm/account}" class="accounting-a">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon>
+                        </ion-icon></span>
+                    <span class="title">accounting</span>
+
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="@{/gm/work_list}" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">work list</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="@{/gm/member}" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="title">member</span>
+                </a>
+            </li>
+
+            <li class="food" onclick="pass_value()">
+                <a th:href="@{/gm/food}" class="food-a">
+                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                    <span class="title">food</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <!--search-->
+            <!--                <div class="search">-->
+            <!--                    <label>-->
+            <!--                        <input type="text" placeholder="accounting">-->
+
+            <!--                    </label>-->
+            <!--                    <div class="search-icon">-->
+            <!--                        <ion-icon name="search-outline"></ion-icon>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!-- users-->
+            <div class="users">
+                <img th:src="*{headShot}" >
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box">
+                <h1>公告欄</h1>
+<!--                <span th:if="${pass}" th:text="pass"></span>-->
+<!--                <span th:if="${no}" th:text="pass"></span>-->
+<!--                <button th:if="${pass}">pass</button>-->
+<!--                <button th:if="${no}">pass</button>-->
+                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showDate=1&showNav=1&showTitle=0&showPrint=0&showCalendars=0&showTz=0&showTabs=0&src=YmVzdC5lcnAueWFuQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043" style="border-width:0" width="80%" height="80%" frameborder="0" scrolling="no"></iframe>
+                <!--<form th:action="@{/button}" method="post" th:object="${users}">-->
+<!--                    <input type="text" th:placeholder="${users.getUserName()}">-->
+<!--                    <button type="submit" >test</button>-->
+<!--                </form>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let home_click = '';
+    let accounting_click = '';
+    ///new page
+    let new_page_1_click = '';
+    let new_page_2_click = '';
+    //new page--
+    let food_click = '';
+    let bar_toggle_click = window.sessionStorage.getItem('bar_toggle_click');
+
+    let bar_toggle = document.querySelector('.bar-toggle');
+    let navigation = document.querySelector('.navigation');
+    let main = document.querySelector('.main');
+    let home = document.querySelector('.home');
+    let accounting = document.querySelector('.accounting')
+    let home_a = document.querySelector('.home-a');
+    let accounting_a = document.querySelector('.accounting-a');
+    //new page
+    let new_page_1_a = document.querySelector('.new-page-1-a');
+    let new_page_2_a = document.querySelector('.new-page-2-a');
+    //new page--
+    let food_a = document.querySelector('.food-a');
+
+    if (bar_toggle_click === "click") {
+        navigation.classList.toggle('active');
+        main.classList.toggle('active');
+    }
+    //
+    // if (home_click === "click") {
+    //     home.classList.toggle('hovered');
+    // }
+    //
+    // if (accounting_click === 'click') {
+    //     accounting.classList.toggle('hovered');
+    // }
+    // //new page
+    // if (new_page_1_click === 'click') {
+    //     new_page_1_click.classList.toggle('hovered');
+    // }
+    //
+    // if (new_page_2_click === 'click') {
+    //     new_page_2_click.classList.toggle('hovered');
+    // }
+    // //new page--
+
+    bar_toggle.onclick = function () {
+        if (bar_toggle_click !== 'click') {
+            bar_toggle_click = 'click';
+        } else {
+            bar_toggle_click = '';
+        }
+
+        navigation.classList.toggle('active');
+        main.classList.toggle('active');
+    }
+
+    home_a.onclick = function () {
+        home_click = 'click';
+        accounting_click = '';
+        new_page_1_click = '';
+        new_page_2_click = '';
+        food_click = '';
+    }
+
+    accounting_a.onclick = function () {
+        home_click = '';
+        accounting_click = 'click';
+        new_page_1_click = '';
+        new_page_2_click = '';
+        food_click = '';
+    }
+
+    //new page
+    new_page_1_a.onclick = function () {
+        home_click = "";
+        accounting_click = "";
+        new_page_1_click = 'click';
+        new_page_2_click = '';
+        food_click = '';
+    }
+
+    new_page_2_a.onclick = function () {
+        home_click = "";
+        accounting_click = "";
+        new_page_1_click = '';
+        new_page_2_click = 'click';
+        food_click = '';
+    }
+    //new page--
+
+    food_a.onclick = function () {
+        home_click = '';
+        accounting_click = '';
+        new_page_1_click = '';
+        new_page_2_click = '';
+        food_click = 'click';
+    }
+
+    //new page--
+
+    function pass_value() {
+        window.sessionStorage.setItem("home_click", home_click);
+        window.sessionStorage.setItem("accounting_click", accounting_click);
+        window.sessionStorage.setItem("bar_toggle_click", bar_toggle_click);
+
+        //new page
+        window.sessionStorage.setItem("new_page_1_click", new_page_1_click);
+        window.sessionStorage.setItem("new_page_2_click", new_page_2_click);
+        window.sessionStorage.setItem("food_click", food_click);
+        //new page--
+    }
+</script>
+</body>
+</html>

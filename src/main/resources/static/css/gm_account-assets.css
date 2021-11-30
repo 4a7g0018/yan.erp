@@ -1,0 +1,203 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.page-center-border {
+    width: 100vw;
+    height: 85vh;
+    box-shadow: 0 0 3px 1px rgba(51, 51, 51, 0.5);
+    border-radius: 10px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.page-center-top {
+    display: flex;
+}
+
+.page-center-box {
+    display: flex;
+    margin: 10px 10px;
+}
+
+.add_button {
+    transition: 0.6s;
+    display: inline-block;
+    width: 60px;
+    height: 20px;
+    background: #1F8FDB;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 8px 0 0 10px;
+}
+
+.add_button:hover {
+    color: #222222;
+}
+
+.add_button.click {
+    background: #999999;
+    color: white;
+}
+
+.add_button.click:hover {
+    color: #222222;
+}
+
+.input_account_name,
+.input_account_time,
+.input_account_amount {
+    width: 90%;
+    height: 30px;
+    border-radius: 10px;
+    margin: 0 auto auto auto;
+    font-size: 14px;
+}
+
+.button_account_add {
+    width: 25%;
+    height: 30px;
+    margin: 0 4px;
+    border-radius: 10px;
+    color: #2BC743;
+    background: white;
+    border: 1px solid #2BC743;
+}
+
+.button_account_add:hover {
+    background: #2BC743;
+    color: white;
+    transition: 0.8s;
+}
+
+.button_account_clear {
+    width: 25%;
+    height: 30px;
+    margin: 0 4px;
+    border-radius: 10px;
+    color: #525252;
+    background: white;
+    border: 1px solid #525252;
+}
+
+.button_account_clear:hover {
+    background: #525252;
+    color: white;
+    transition: 0.8s;
+}
+
+.button_account_close {
+    font-weight: 700;
+    width: 25%;
+    height: 30px;
+    margin: 0 4px;
+    border-radius: 10px;
+    color: #D10202;
+    background: white;
+    border: 1px solid #D10202;
+}
+
+.button_account_close:hover {
+    color: white;
+    background: #D10202;
+    transition: 0.8s;
+}
+
+.input_account_remark {
+    width: 85%;
+    height: 50px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.edit_button {
+    font-weight: 600;
+    width: 30%;
+    height: 30px;
+    margin: 0 4px;
+    border-radius: 10px;
+    color: #525252;
+    background: white;
+    border: 1px solid #525252;
+}
+
+.edit_button:hover {
+    color: white;
+    background: #525252;
+    transition: 0.8s;
+}
+
+.delete_button {
+    font-weight: 600;
+    width: 30%;
+    height: 30px;
+    margin: 0 4px;
+    border-radius: 10px;
+    color: #D10202;
+    background: white;
+    border: 1px solid #D10202;
+}
+
+.delete_button:hover {
+    color: white;
+    background: #D10202;
+    transition: 0.8s;
+}
+
+.edit_input_account_name,
+.edit_input_account_time,
+.edit_input_account_amount {
+    width: 90%;
+    height: 30px;
+    display: block;
+    border-radius: 10px;
+    margin: 0 auto auto auto;
+    font-size: 14px;
+}
+
+.edit_button_account_add {
+    width: 30%;
+    height: 30px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 10px;
+    color: #2BC743;
+    background: white;
+    border: 1px solid #2BC743;
+}
+
+.edit_button_account_add:hover {
+    color: white;
+    background: #2BC743;
+}
+
+.edit_button_account_clear {
+    width: 30%;
+    height: 30px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 10px;
+    color: #D10202;
+    background: white;
+    border: 1px solid #D10202;
+}
+
+.edit_button_account_clear:hover {
+    background: #D10202;
+    color: white;
+}
+
+.edit_input_account_remark {
+    width: 85%;
+    height: 50px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 5px;
+}

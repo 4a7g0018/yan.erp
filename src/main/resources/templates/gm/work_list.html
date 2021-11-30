@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>new-page-1</title>
+        <link rel="stylesheet" type="text/css" href="/css/gm_index.css">
+        <link rel="stylesheet" type="text/css" href="/css/checkbox.css">
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Ubuntu', sans-serif;
+            /*font-size: 20px;*/
+        }
+
+        .cover {
+            /*display: none;*/
+            left: 50%;
+            top: 50%;
+            width: 0;
+            height: 0;
+        }
+
+        cover_table_jub_title,
+        .cover_table_priority,
+        .cover_table_date,
+        .cover_table_participants,
+        .cover_table_illustrate,
+        .cover_table_announce,
+        .cover_table_finish,
+        .cover_table_button {
+            display: none;
+        }
+
+        .cover.click {
+            left: 0;
+            top: 0;
+            transition: background .6s, height .3s, padding-top .5s cubic-bezier(0.82,-0.03, 0.35, 1.24) ;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            padding: 50px 0;
+            text-align: center;
+            background: hsla(0, 100%, 0%, 0.5);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .cover-center {
+            /*border: 10px black solid;*/
+            border-radius: 40px;
+            padding-top: 10px;
+            width: 35%;
+            min-width: 700px;
+            /*height: 80%;*/
+            background: white;
+        }
+
+        .cover_table_jub_title.click,
+        .cover_table_priority.click,
+        .cover_table_date.click,
+        .cover_table_participants.click,
+        .cover_table_illustrate.click,
+        .cover_table_announce.click,
+        .cover_table_finish.click {
+            width: 100%;
+            margin: 5% 0 5% 0;
+            display: flex;
+            justify-content: space-between;
+            justify-items: center;
+            text-align: left;
+
+        }
+
+        .cover_table_input {
+            width: 300px;
+            height: 25px;
+        }
+
+        .cover_table_select {
+            width: 300px;
+            height: 25px;
+        }
+
+        .cover_table_input_illustrate {
+            width: 300px;
+            height: 130px;
+            font-size: 16px;
+            /*overflow: auto;*/
+        }
+
+        .cover_table_button.click {
+            display: block;
+        }
+
+        .cover_table_label {
+            width: 100px;
+            font-size: 20px;
+        }
+
+        .cover_table_button_save {
+            border-radius: 10px;
+            background: #2BC743;
+            width: 100px;
+            height: 35px;
+            margin: 10px;
+            border: 2px solid #222222;
+            font-weight: 600;
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .cover_table_button_save:hover {
+            background: #fff;
+            color: #2BC743;
+        }
+
+        .cover_table_button_back {
+            border-radius: 10px;
+            background: #525252;
+            width: 100px;
+            height: 35px;
+            margin: 10px;
+            border: 2px solid #222222;
+            font-weight: 600;
+            font-size: 15px;
+            color: #ffffff;
+        }
+
+        .cover_table_button_back:hover {
+            background: #999;
+            color: black;
+        }
+
+        .add_new_work_button {
+            cursor: pointer;
+            width: 140px;
+            height: 35px;
+            margin-right: 30px;
+            border-radius: 10px;
+            color: #2BC743;
+            background: white;
+            border: 1px solid #2BC743;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .add_new_work_button:hover {
+            background: #2BC743;
+            color: white;
+            transition: 0.8s;
+        }
+
+        .edit_button_work_list {
+            font-weight: 600;
+            width: 30%;
+            height: 30px;
+            margin: 0 4px;
+            border-radius: 10px;
+            color: #525252;
+            background: white;
+            border: 1px solid #525252;
+        }
+
+        .edit_button_work_list:hover {
+            color: white;
+            background: #525252;
+            transition: 0.8s;
+        }
+
+        .delete_button_work_list {
+            font-weight: 600;
+            width: 30%;
+            height: 30px;
+            margin: 0 4px;
+            border-radius: 10px;
+            color: #D10202;
+            background: white;
+            border: 1px solid #D10202;
+        }
+
+        .delete_button_work_list:hover {
+            color: white;
+            background: #D10202;
+            transition: 0.8s;
+        }
+
+        .job_title,
+        .priority,
+        .date,
+        .participants,
+        .illustrate,
+        .announce,
+        .finish {
+
+            /*width: 300px;*/
+        }
+
+        .priority-wrapper {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            justify-items: center;
+            align-items: center;
+        }
+
+        /*.participants_checkbox {*/
+        /*    margin-right: 10px;*/
+        /*}*/
+
+        .participants{
+            appearance: none;
+            width: 0;
+            height: 0;
+        }
+
+        .participants_box{
+            /*background: #999;*/
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .participants_box > div {
+            margin-bottom: 1rem;
+            display: inline-flex;
+            flex-basis: 60px;
+            justify-content: center;
+        }
+
+        .participants_checkbox div{
+            width: 50%;
+        }
+
+        .participants_checkbox div label{
+            font-size: 30px;
+            background: #000;
+        }
+
+        .participants:checked ~ label {
+            background: #1F8FDB;
+            border: 2px solid #1F8FDB;
+            border-radius: 10px;
+            /*border: 1px solid #8A8A8A;*/
+        }
+
+        .participants_box label{
+            margin-right: 1%;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            /*border: none;*/
+        }
+
+        tbody {
+            border: none;
+        }
+
+        td {
+            border: none;
+        }
+
+        thead {
+            background: #525252;
+            color: white;
+            height: 40px;
+
+        }
+
+        tbody{
+            padding: 10px;
+        }
+
+        tbody tr:hover {
+            /*border: 1px #8A8A8A solid;*/
+            /*box-shadow: 2px 2px 2px 1px #1F8FDB;*/
+            background: #E3E3E3;
+            transition: 0.8s;
+            border-radius: 10px;
+
+            -webkit-box-shadow: 0 0 15px #D6D6D6;
+            -moz-box-shadow: 0 0 15px #D6D6D6;
+            box-shadow: 0 0 10px #D6D6D6;
+        }
+
+        tbody tr {
+            height: 60px;
+        }
+
+        .priority-red {
+            padding: 5px;
+            height: 30px;
+            width: 100%;
+            display: inline-block;
+            align-items: center;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 30px;
+            background: red;
+        }
+
+        .priority-orange {
+            padding: 5px;
+            height: 30px;
+            width: 100%;
+            display: inline-block;
+            align-items: center;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 30px;
+            background: orange;
+        }
+
+        .priority-yellow {
+            padding: 5px;
+            height: 30px;
+            width: 100%;
+            display: inline-block;
+            align-items: center;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 30px;
+            background: yellow;
+        }
+
+        .priority-green {
+            padding: 5px;
+            height: 30px;
+            width: 100%;
+            display: inline-block;
+            align-items: center;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 30px;
+            background: greenyellow;
+        }
+
+        .priority-gray {
+            padding: 5px;
+            height: 30px;
+            width: 100%;
+            display: inline-block;
+            align-items: center;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 30px;
+            background: #999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="@{/gm/index}">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="@{/gm/home}" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="accounting" onclick="pass_value()">
+                <a th:href="@{/gm/account}" class="accounting-a">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon>
+                        </ion-icon></span>
+                    <span class="title">accounting</span>
+
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="@{/gm/work_list}" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">work list</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="@{/gm/member}" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="title">member</span>
+                </a>
+            </li>
+
+            <li class="food" onclick="pass_value()">
+                <a th:href="@{/gm/food}" class="food-a">
+                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                    <span class="title">food</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <!--search-->
+            <!--                <div class="search">-->
+            <!--                    <label>-->
+            <!--                        <input type="text" placeholder="accounting">-->
+
+            <!--                    </label>-->
+            <!--                    <div class="search-icon">-->
+            <!--                        <ion-icon name="search-outline"></ion-icon>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!-- users-->
+            <div class="users">
+                <img th:src="*{headShot}">
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box">
+                <!--                <div>-->
+                <!--                    <h1>工作清單</h1>-->
+                <!--                </div>-->
+
+                <div style="overflow: auto">
+                    <div style="display: flex;justify-content: center;">
+                        <h1>工作清單</h1>
+                    </div>
+
+                    <div style="width: 100%;display: flex;justify-content: right;">
+                        <button class="add_new_work_button" onclick="show_add_work_participants()">+ 新增工作</button>
+                    </div>
+
+                    <div style="padding: 5px;">
+<!--                        cellpadding="0" cellspacing="0"-->
+                        <table id="table" >
+                            <thead>
+                            <tr>
+                                <th style="width: 150px;max-width: 10%">name</th>
+                                <th style="width: 100px;max-width: 12%">priority</th>
+                                <th style="width: 150px;max-width: 10%">date</th>
+                                <th style="width: 275px;max-width: 20%">participants</th>
+                                <th style="width: 275px;max-width: 20%">illustrate</th>
+                                <th style="width: 100px;max-width: 10%">announce</th>
+                                <th style="width: 125px;max-width: 10%">finish</th>
+                                <th style="width: 225px;max-width: 15%"></th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="table-center">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<form th:action="@{/admin/new-page-1/work_list/save}" method="post" th:object="${work_list}">-->
+<form id="myForm" enctype="multipart/form-data" method="post">
+    <div>
+        <!--    <form th:action="@{/admin/new-page-2/save}" method="post" th:object="${addUser}">-->
+        <!--        <input id="id" type="hidden" th:field="*{id}">-->
+        <div class="cover">
+            <div class="cover-center">
+                <div style="margin-top: 10px;padding:0 100px">
+                    <input type="hidden" id="id">
+                    <div class="cover_table_jub_title">
+                        <label class="cover_table_label">Name :</label>
+                        <input id="job_title" class="cover_table_input abc" type="text" placeholder="job title">
+                    </div>
+
+                    <div class="cover_table_priority">
+                        <label class="cover_table_label">Priority :</label>
+                        <select id="priority" class="cover_table_select abc">
+                            <option value="">choose Priority</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                        <!--                    <input id="password" class="cover_table_input" type="text" placeholder="password">-->
+                    </div>
+
+                    <div class="cover_table_date">
+                        <label class="cover_table_label">Date:</label>
+                        <input id="date" class="cover_table_input abc" type="date">
+                    </div>
+
+                    <div class="cover_table_participants">
+                        <label class="cover_table_label">Participants:</label>
+                        <div id="participants_checkbox" class="participants_box">
+
+                        </div>
+                        <!--                        <input id="participants" class="cover_table_input" type="checkbox">-->
+                    </div>
+
+                    <div class="cover_table_illustrate">
+                        <label class="cover_table_label">Illustrate:</label>
+                        <textarea id="illustrate" class="cover_table_input_illustrate abc"></textarea>
+                    </div>
+
+                    <div class="cover_table_announce">
+                        <label class="cover_table_label">announce:</label>
+                        <input id="announce" class="cover_table_input abc" type="checkbox">
+                    </div>
+
+                    <div class="cover_table_finish">
+                        <label class="cover_table_label">finish:</label>
+                        <input id="finish" class="cover_table_input abc" type="checkbox">
+                    </div>
+
+                    <div class="cover_table_button">
+                        <button type="submit" class="cover_table_button_save" onclick="upload_work_list()">save</button>
+                        <button type="button" class="cover_table_button_back" onclick="clear_table()">back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--    </form>-->
+    </div>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    var $tbody = window.sessionStorage.getItem("tbody")
+    var work_list_json;
+
+    let cover = document.querySelector('.cover');
+    let cover_table_jub_title = document.querySelector('.cover_table_jub_title');
+    let cover_table_priority = document.querySelector('.cover_table_priority');
+    let cover_table_date = document.querySelector('.cover_table_date');
+    let cover_table_participants = document.querySelector('.cover_table_participants');
+    let cover_table_illustrate = document.querySelector('.cover_table_illustrate');
+    let cover_table_announce = document.querySelector('.cover_table_announce');
+    let cover_table_finish = document.querySelector('.cover_table_finish');
+    let cover_table_button = document.querySelector('.cover_table_button');
+
+    function show_add_work() {
+        cover.classList.toggle('click');
+        cover_table_jub_title.classList.toggle('click');
+        cover_table_priority.classList.toggle('click');
+        cover_table_date.classList.toggle('click');
+        cover_table_participants.classList.toggle('click');
+        cover_table_illustrate.classList.toggle('click');
+        cover_table_announce.classList.toggle('click');
+        cover_table_finish.classList.toggle('click');
+        cover_table_button.classList.toggle('click');
+    }
+
+    function clear_table() {
+        document.getElementById("id").value = null;
+        document.getElementById("job_title").value = null;
+        document.getElementById("priority").value = null;
+        document.getElementById("date").value = null;
+        document.getElementsByClassName("participants").checked = false;
+        document.getElementById("illustrate").value = null;
+        document.getElementById("announce").checked = false;
+        document.getElementById("finish").checked = false;
+        show_add_work();
+    }
+
+    function show_add_work_participants(section = []) {
+
+        $.ajax({
+            type: 'GET',
+            url: '/gm/work_list/get_user',
+            async: true,
+            success: function (data) {
+                let strs = "";
+                console.log(data)
+                for (let user_name in data) {
+                    console.log(data[user_name]);
+                    strs +='<div>'
+
+                    strs += '<input id="' + data[user_name] + '" type="checkbox" class="participants participants-quantity">'
+                        + '<label for="' + data[user_name] + '">' + data[user_name] + '</label>';
+
+                    strs+='</div>'
+                }
+                console.log(strs)
+
+                $('#participants_checkbox').html(strs);
+
+                section.forEach(val => {
+                    document.getElementById(val).checked = true
+                })
+
+                show_add_work();
+
+            }
+        });
+
+    };
+
+
+    $.ajax({
+        type: 'GET',
+        url: '/gm/work_list/get_all_work',
+        async: true,
+        success: function (data) {
+            console.log(data)
+            work_list_json = JSON.parse(JSON.stringify(data));
+            let str;
+            for (let work_list_center in work_list_json) {
+                console.log(work_list_json[work_list_center])
+                str += '<tr>'
+                    + '<input id="roleId" " type="hidden" value="'+work_list_json[work_list_center]["roleId"]+'">'
+                    + '<td>' + work_list_json[work_list_center]['workName'] + '</td>';
+
+                str += '<td><div class="priority-wrapper">'
+                switch (work_list_json[work_list_center]['priority']) {
+                    case 5:
+                        str += '<div class="priority-red">' + work_list_json[work_list_center]['priority'] + '</div>';
+                        break;
+                    case 4:
+                        str += '<div class="priority-orange">' + work_list_json[work_list_center]['priority'] + '</div>';
+                        break;
+                    case 3:
+                        str += '<div class="priority-yellow">' + work_list_json[work_list_center]['priority'] + '</div>';
+                        break;
+                    case 2:
+                        str += '<div class="priority-green">' + work_list_json[work_list_center]['priority'] + '</div>';
+                        break;
+                    case 1:
+                        str += '<div class="priority-gray">' + work_list_json[work_list_center]['priority'] + '</div>';
+                        break;
+                }
+                str += '</div></td>'
+
+                let date = work_list_json[work_list_center]['date'].substr(0, 10)
+                str += '<td>' + date + '</td>';
+                str += '<td>';
+                str+='<div style="word-wrap:break-word;width: 100%;max-width: 275px;padding: 2px;">'
+                for (let participants_length in work_list_json[work_list_center]['participants']) {
+                    if (participants_length >= 1) {
+                        str += ',' + work_list_json[work_list_center]['participants'][participants_length]
+                    } else {
+                        str += work_list_json[work_list_center]['participants'][participants_length]
+                    }
+                }
+                str+='</div>'
+                str += '</td>';
+
+                str += '<td>'
+                    +'<div style="word-wrap:break-word;width: 100%;max-width: 275px">'+work_list_json[work_list_center]['illustrate'] +'</div>'
+                    + '</td>'
+                    + '<td>'
+                    + '<div class="checkbox-container">'
+                    + '<label>'
+                    + '<input id="announce_' + work_list_json[work_list_center]['id'] + '" type="checkbox" onclick="touch_announce(' + work_list_json[work_list_center]['id'] + ')"><span><i></i></span>'
+                    + '</label>'
+                    + '</div>'
+                    + '</td>'
+                    + '<td>'
+                    + '<div class="checkbox-container">'
+                    + '<label>'
+                    + '<input id="finish_' + work_list_json[work_list_center]['id'] + '" type="checkbox" onclick="touch_finish(' + work_list_json[work_list_center]['id'] + ')"><span><i></i></span>'
+                    + '</label>'
+                    + '</div>'
+                    + '</td>'
+
+
+                // + '<td><input id="announce_' + work_list_json[work_list_center]['id'] + '" type="checkbox" onclick="touch_announce('+work_list_json[work_list_center]['id']+')"></td>'
+                // + '<td><input id="finish_' + work_list_json[work_list_center]['id'] + '" type="checkbox" onclick="touch_finish('+work_list_json[work_list_center]['id']+')">' + work_list_json[work_list_center]['finish'] + '</td>'
+
+
+                str += '<td>'
+                    + '<button onclick="edit_work_list(' + work_list_json[work_list_center]['id'] + ')" class="edit_button_work_list">edit</button>'
+                    + '<button onclick="delete_work_list(' + work_list_json[work_list_center]['id'] + ')" class="delete_button_work_list">delete</button>'
+                    + '</td>';
+                str += '</tr>';
+
+// <div className="checkbox-container">
+//                     <label>
+//                         <input type="checkbox"><span><i></i></span>
+//                     </label>
+//                 </div>
+
+                // str += '<td>' + work_list_json[work_list_center]['illustrate'] + '</td>'
+                //     + '<td><input id="announce_' + work_list_json[work_list_center]['id'] + '" type="checkbox" onclick="touch_announce('+work_list_json[work_list_center]['id']+')"></td>'
+                //     + '<td><input id="finish_' + work_list_json[work_list_center]['id'] + '" type="checkbox" onclick="touch_finish('+work_list_json[work_list_center]['id']+')">' + work_list_json[work_list_center]['finish'] + '</td>'
+                //     + '<td>'
+                //     + '<button onclick="edit_work_list(' + work_list_json[work_list_center]['id'] + ')">edit</button>'
+                //     + '<button onclick="delete_work_list(' + work_list_json[work_list_center]['id'] + ')">delete</button>'
+                //     + '</td>';
+                // str += '</tr>';
+
+            }
+            $("#table-center").html(str);
+
+            for (let json_number in work_list_json) {
+                console.log(work_list_json[json_number]['announce']);
+                console.log(work_list_json[json_number]['finish']);
+                console.log(work_list_json[json_number]['id']);
+                let id = work_list_json[json_number]['id'];
+                document.getElementById("announce_" + id).checked = work_list_json[json_number]['announce'];
+                document.getElementById("finish_" + id).checked = work_list_json[json_number]['finish'];
+            }
+            // window.location.reload();
+
+        }
+    });
+
+    function upload_work_list() {
+        let formData = new FormData();
+
+        //add participants list
+        let participants = $('.participants-quantity')
+        let participants_list = [];
+        for (let i = 0; i < participants.length; i++) {
+            console.log(participants[i].checked)
+            console.log("111-"+participants[i].id)
+            if (participants[i].checked) {
+
+                // participants_list.push(i + 1)
+                participants_list.push(participants[i].id)
+            }
+        }
+        // console.log(participants_list)
+
+        console.log("data")
+        formData.append('workName', document.getElementById("job_title").value);
+        console.log('workName:' + $('#job_title').val() + typeof $('#job_title').val())
+
+        formData.append('priority', document.getElementById("priority").value);
+        console.log('priority:' + $('#priority').val() + typeof $('#priority').val())
+
+        formData.append('date', document.getElementById("date").value);
+        console.log('date:' + $('#date').val() + typeof $('#date').val())
+
+        formData.append('participants', participants_list);
+        console.log('participants:' + participants_list + typeof participants_list)
+
+        formData.append('illustrate', document.getElementById("illustrate").value);
+        console.log('illustrate:' + $('#illustrate').val() + typeof $('#illustrate').val())
+
+        formData.append('announce', document.getElementById("announce").checked);
+        console.log('announce:' + document.getElementById("announce").checked)
+
+        formData.append('finish', document.getElementById("finish").checked);
+        console.log('finish:' + document.getElementById("finish").checked)
+
+        formData.append('roleId', document.getElementById("roleId").value);
+        console.log('roleId:' + $('#roleId').val() + typeof $('#roleId').val())
+
+
+        let id = $('#id').val();
+        console.log("id:" + id)
+        if (id > 0) {
+
+            formData.append('id', document.getElementById("id").value);
+            console.log('id:' + $('#id').val() + typeof $('#id').val())
+            console.log(formData)
+            $.ajax({
+                type: 'POST',
+                url: '/gm/work_list/save',
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                async: true,
+                success: function (data) {
+                    alert('success');
+                    window.location.reload();
+                    console.log("success :" + data)
+                },
+                error: function (ex) {
+                    alert('error')
+                    console.log(ex)
+                    console.log("error :" + ex)
+                }
+            });
+        } else {
+            console.log('else')
+            alert('else')
+            console.log("--------------------------")
+            console.log(formData)
+            $.ajax({
+                type: 'POST',
+                url: '/gm/work_list/save',
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                async: true,
+                success: function (data) {
+                    alert('success');
+                    window.location.reload();
+                },
+                error: function (ex) {
+                    alert('error')
+                    console.log(ex)
+                }
+            });
+        }
+        clear_table();
+        window.location.reload();
+    }
+
+    $('#myForm').submit((e) => {
+        e.preventDefault();
+    })
+
+    function touch_announce(work_list_id) {
+        // alert("touch announce :"+work_list_id)
+
+        $.ajax({
+            type: 'POST',
+            url: '/gm/work_list/announce/' + work_list_id,
+            sync: true,
+            success: function (data) {
+                // alert(data);
+            },
+            error: function (e) {
+                // alert(e);
+            }
+        });
+        // window.location.reload();
+    }
+
+    function touch_finish(work_list_id) {
+        // alert("touch finish!!!!")
+
+        $.ajax({
+            type: 'POST',
+            url: '/gm/work_list/finish/' + work_list_id,
+            sync: true,
+            success: function (data) {
+                // alert(data);
+            },
+            error: function (e) {
+                // alert(e);
+            }
+        });
+        // window.location.reload();
+    }
+
+    function edit_work_list(work_list_id) {
+        $.ajax({
+            type: 'GET',
+            url: '/gm/work_list/edit/' + work_list_id,
+            sync: true,
+            success: function (data) {
+                let json = JSON.parse(JSON.stringify(data));
+                // console.log(data);
+                show_add_work_participants(json['participants']);
+                document.getElementById('id').value = json['id'];
+                document.getElementById('job_title').value = json['workName'];
+                document.getElementById('priority').value = json['priority'];
+                // let date = json['date'].replace(/\//g, '-');
+                let date = json['date'].substr(0, 10)
+                document.getElementById('date').value = date;
+                document.getElementById('illustrate').value = json['illustrate'];
+                document.getElementById('announce').checked = json['announce'];
+                document.getElementById('finish').checked = json['finish']
+                document.getElementById('roleId').checked = json['roleId']
+
+            }
+        });
+        // window.location.reload();
+    }
+
+    function delete_work_list(work_list_id) {
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/gm/work_list/delete/' + work_list_id,
+            sync: false,
+            success: function (data) {
+                alert("SUCCESS delete id:" + data)
+            },
+            error: function (e) {
+                alert("ERROR " + e)
+            }
+        });
+        window.location.reload();
+    }
+
+
+</script>
+
+<script src="/js/content_page.js"></script>
+</body>
+</html>

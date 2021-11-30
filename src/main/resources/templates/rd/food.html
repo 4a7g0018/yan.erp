@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>admin-home</title>
+    <link rel="stylesheet" type="text/css" href="/css/rd_index.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li onclick="pass_value()">
+                    <a th:href="@{/rd/index}">
+                        <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                        <span class="title">Best ERP</span>
+                    </a>
+                </li>
+
+                <li class="home" onclick="pass_value()">
+                    <a th:href="@{/rd/home}" class="home-a">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+
+                <li class="new-page-1" onclick="pass_value()">
+                    <a th:href="@{/rd/work_list}" class="new-page-1-a">
+                        <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                        <span class="title">work list</span>
+                    </a>
+                </li>
+
+                <li class="new-page-2" onclick="pass_value()">
+                    <a th:href="@{/rd/member}" class="new-page-2-a">
+                        <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                        <span class="title">member</span>
+                    </a>
+                </li>
+
+                <li class="food" onclick="pass_value()">
+                    <a th:href="@{/rd/food}" class="food-a">
+                        <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                        <span class="title">food</span>
+                    </a>
+                </li>
+
+                <li class="logout">
+                    <a th:href="@{/logout}" class="logout">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title">logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="topbar">
+                <div class="bar-toggle">
+                    <ion-icon name="list-outline"></ion-icon>
+                </div>
+                <!--search-->
+                <!--                <div class="search">-->
+                <!--                    <label>-->
+                <!--                        <input type="text" placeholder="accounting">-->
+
+                <!--                    </label>-->
+                <!--                    <div class="search-icon">-->
+                <!--                        <ion-icon name="search-outline"></ion-icon>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+                <!-- users-->
+                <div class="users">
+                    <img th:src="*{headShot}" >
+                </div>
+            </div>
+
+            <div class="page-center">
+                <div class="center-box">
+                    <h1>公告欄</h1>
+                    <!--                <span th:if="${pass}" th:text="pass"></span>-->
+                    <!--                <span th:if="${no}" th:text="pass"></span>-->
+                    <!--                <button th:if="${pass}">pass</button>-->
+                    <!--                <button th:if="${no}">pass</button>-->
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showDate=1&showNav=1&showTitle=0&showPrint=0&showCalendars=0&showTz=0&showTabs=0&src=YmVzdC5lcnAueWFuQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043" style="border-width:0" width="80%" height="80%" frameborder="0" scrolling="no"></iframe>
+                    <!--<form th:action="@{/button}" method="post" th:object="${users}">-->
+                    <!--                    <input type="text" th:placeholder="${users.getUserName()}">-->
+                    <!--                    <button type="submit" >test</button>-->
+                    <!--                </form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <!--search-->
+            <!--                <div class="search">-->
+            <!--                    <label>-->
+            <!--                        <input type="text" placeholder="accounting">-->
+
+            <!--                    </label>-->
+            <!--                    <div class="search-icon">-->
+            <!--                        <ion-icon name="search-outline"></ion-icon>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!-- users-->
+            <div class="users">
+                <img th:src="*{headShot}">
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box">
+                <div style="overflow: auto;padding: 10px">
+                    <div style="text-align: center; margin-bottom: 1%">
+                        <h1>訂餐專區</h1>
+                        <button>新增菜單</button>
+                    </div>
+                    <div style="display: flex">
+                        <div  style="width: 33vw;height:73vh; border: 3px solid #999999;margin-right: 1%;border-radius: 10px">
+                            <div id="account-pie" style="width: 100%; height: 100%;">
+                                <img src="" alt="" style="background: #000;width: 100%;height: 100%;">
+                            </div>
+                        </div>
+                        <div style="width: 33vw;height:73vh;">
+                            <div id="work-bar-graph" style="width: 100%; height: 29%; border: 3px solid #999999;border-radius: 10px;margin-bottom: 2% ">
+                                <div style="width: 100%;height: 100%;background: #B0B0B0;padding: 5px;">
+                                    <div style="width: 100%;height: 20%;display: flex;align-items: center">
+                                        <label>姓名 : 王大明</label>
+                                        <label>員工編號 : 123</label>
+                                    </div>
+
+                                    <div style="width: 100%;height: 60%;">
+                                        <textarea style="width: 100%;height: 100%;font-size: 20px;font-weight: 600;border-radius: 20px"> </textarea>
+                                    </div>
+
+                                    <div style="width: 100%;height: 20%;display: flex;align-items: center;justify-content: right">
+                                        <button style="border: none;width: 60px;height: 30px;border-radius: 20px;font-weight: 700;font-size: 15px">點餐</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="area-chart" style="width: 100%; height: 69%; border: 3px solid #999999;border-radius: 10px;overflow: auto">點餐總表</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<script src="/js/content_page_rd.js"></script>
+<script>
+
+</script>
+</body>
+</html>

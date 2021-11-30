@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>new-page-1</title>
+    <link rel="stylesheet" type="text/css" href="/css/gm_index.css">
+    <link rel="stylesheet" type="text/css" href="/css/checkbox.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        .account-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .account-box-title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .account-box-item {
+            display: flex;
+            flex: 0 0 32%;
+            background: #B0B0B0;
+            width: 33%;
+            height: 49%;
+            margin: 0 15px 15px 0;
+            padding: 10px;
+            border-radius: 30px;
+            overflow: auto
+        }
+
+        .all-box{
+            font-size: 40px;
+            font-weight: 800;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+        .account-box-item:hover{
+            cursor: pointer;
+            transition: 0.5s;
+            background: #999999;
+            font-size: 18px;
+        }
+
+        .all-box:hover{
+            font-size: 60px;
+            font-weight: 800;
+        }
+
+        table{
+            border: #999999;
+            border-collapse: collapse;
+        }
+
+        th{
+            width: 30%;
+            border: none;
+        }
+
+        td{
+            /*border: #999999;*/
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="@{/gm/index}">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="@{/gm/home}" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="accounting" onclick="pass_value()">
+                <a th:href="@{/gm/account}" class="accounting-a">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon>
+                        </ion-icon></span>
+                    <span class="title">accounting</span>
+
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="@{/gm/work_list}" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">work list</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="@{/gm/member}" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="title">member</span>
+                </a>
+            </li>
+
+            <li class="food" onclick="pass_value()">
+                <a th:href="@{/gm/food}" class="food-a">
+                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                    <span class="title">food</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <!--search-->
+            <!--                <div class="search">-->
+            <!--                    <label>-->
+            <!--                        <input type="text" placeholder="accounting">-->
+
+            <!--                    </label>-->
+            <!--                    <div class="search-icon">-->
+            <!--                        <ion-icon name="search-outline"></ion-icon>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!-- users-->
+            <div class="users">
+                <img th:src="*{headShot}">
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box">
+                <div class="account-box">
+                    <div class="account-box-item all-box" onclick="show_all_page()">
+                        All
+                    </div>
+                    <div class="account-box-item" onclick="show_assets_page()">
+                        <div>
+                            <div class="account-box-title">
+                                資產類
+                            </div>
+                            <table>
+                                <thead>
+                                    <th style="width: 250px">Name</th>
+                                    <th style="width: 250px;">time</th>
+                                    <th style="width: 150px;">Amount</th>
+                                </thead>
+                                <tbody id="tbody-assets">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="account-box-item" onclick="show_liabilities_page()">
+                        <div>
+                            <div class="account-box-title">
+                                負債類
+                            </div>
+                            <table>
+                                <thead>
+                                <th style="width: 250px">Name</th>
+                                <th style="width: 250px;">time</th>
+                                <th style="width: 150px;">Amount</th>
+                                </thead>
+                                <tbody id="tbody-liabilities">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="account-box-item" onclick="show_owners_equity_page()">
+                        <div>
+                            <div class="account-box-title">
+                                權益類
+                            </div>
+                            <table>
+                                <thead>
+                                <th style="width: 250px">Name</th>
+                                <th style="width: 250px;">time</th>
+                                <th style="width: 150px;">Amount</th>
+                                </thead>
+                                <tbody id="tbody-owners_equity">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="account-box-item" onclick="show_revenue_page()">
+                        <div>
+                            <div class="account-box-title">
+                                收益類
+                            </div>
+                            <table>
+                                <thead>
+                                <th style="width: 250px">Name</th>
+                                <th style="width: 250px;">time</th>
+                                <th style="width: 150px;">Amount</th>
+                                </thead>
+                                <tbody id="tbody-revenue">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="account-box-item" onclick="show_expenses_page()">
+                        <div>
+                            <div class="account-box-title">
+                                費損類
+                            </div>
+                            <table>
+                                <thead>
+                                <th style="width: 250px">Name</th>
+                                <th style="width: 250px;">time</th>
+                                <th style="width: 150px;">Amount</th>
+                                </thead>
+                                <tbody id="tbody-expenses">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+<!--                    <div class="account-box-item" onclick="show_all_page()"></div>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/gm/account.js"></script>
+<script>
+    function show_assets_page() {
+        window.location.href = "/gm/account/assets"
+    }
+
+    function show_liabilities_page() {
+        window.location.href = "/gm/account/liabilities"
+    }
+
+    function show_owners_equity_page() {
+        window.location.href = "/gm/account/owners_equity"
+    }
+
+    function show_revenue_page() {
+        window.location.href = "/gm/account/revenue"
+    }
+
+    function show_expenses_page() {
+        window.location.href = "/gm/account/expenses"
+    }
+
+    function show_all_page() {
+        window.location.href = "/gm/account/all"
+    }
+
+    $(function () {
+        show_assets();
+        show_liabilities();
+        show_owner_equity();
+        show_expenses();
+        show_revenue();
+    })
+
+</script>
+
+<script src="/js/content_page.js"></script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin-index</title>
+    <link rel="stylesheet" type="text/css" href="/css/rd_index.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Ubuntu', sans-serif;
+            /*font-size: 20px;*/
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            /*border: none;*/
+        }
+
+        tbody {
+            border: none;
+        }
+
+        td {
+            border: none;
+        }
+
+        thead {
+            background: #525252;
+            color: white;
+            height: 40px;
+
+        }
+
+        tbody {
+            padding: 10px;
+        }
+
+        tbody tr:hover {
+            /*border: 1px #8A8A8A solid;*/
+            /*box-shadow: 2px 2px 2px 1px #1F8FDB;*/
+            background: #E3E3E3;
+            transition: 0.8s;
+            border-radius: 10px;
+
+            -webkit-box-shadow: 0 0 15px #D6D6D6;
+            -moz-box-shadow: 0 0 15px #D6D6D6;
+            box-shadow: 0 0 10px #D6D6D6;
+        }
+
+        tbody tr {
+            cursor: pointer;
+            height: 60px;
+        }
+
+        .edit_button_user {
+            font-weight: 600;
+            width: 30%;
+            height: 30px;
+            margin: 0 4px;
+            border-radius: 10px;
+            color: #525252;
+            background: white;
+            border: 1px solid #525252;
+        }
+
+        .edit_button_user:hover {
+            color: white;
+            background: #525252;
+            transition: 0.8s;
+        }
+
+        .delete_button_user {
+            font-weight: 600;
+            width: 30%;
+            height: 30px;
+            margin: 0 4px;
+            border-radius: 10px;
+            color: #D10202;
+            background: white;
+            border: 1px solid #D10202;
+        }
+
+        .delete_button_user:hover {
+            color: white;
+            background: #D10202;
+            transition: 0.8s;
+        }
+
+        .cover {
+            /*display: none;*/
+            left: 50%;
+            top: 50%;
+            width: 0;
+            height: 0;
+        }
+
+        .cover_table_userid {
+            display: none;
+        }
+
+        .cover_table_user_name {
+            display: none;
+        }
+
+        .cover_table_email{
+            display: none;
+        }
+
+        .cover_table_phone{
+            display: none;
+        }
+
+        .cover_table_update_image{
+            display: none;
+        }
+
+        .cover_table_button {
+            display: none;
+        }
+
+        .cover.click {
+            left: 0;
+            top: 0;
+            transition: background .6s, height .3s, padding-top .5s cubic-bezier(0.82, -0.03, 0.35, 1.24);
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            padding: 50px 0;
+            text-align: center;
+            background: hsla(0, 100%, 0%, 0.5);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .cover-center {
+            border-radius: 40px;
+            margin: auto;
+            padding-top: 10px;
+            width: 35%;
+            min-width: 500px;
+            height: 80vh;
+            background: white;
+            text-align: center;
+        }
+
+        .cover_table_userid.click,
+        .cover_table_user_name.click,
+        .cover_table_email.click,
+        .cover_table_phone.click,
+        .cover_table_button.click,
+        .cover_table_update_image.click {
+            margin: 4% auto 0 auto;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            justify-items: center;
+            text-align: left;
+        }
+
+        .cover_table_button.click {
+            display: inline-block;
+            text-align: center;
+            justify-content: space-between;
+            justify-items: center;
+        }
+
+        .cover_table_button_save {
+            border-radius: 10px;
+            background: #2BC743;
+            width: 100px;
+            height: 35px;
+            margin: 10px;
+            border: 2px solid #222222;
+            font-weight: 600;
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .cover_table_button_save:hover {
+            background: #fff;
+            color: #2BC743;
+        }
+
+        .cover_table_button_back {
+            border-radius: 10px;
+            background: #525252;
+            width: 100px;
+            height: 35px;
+            margin: 10px;
+            border: 2px solid #222222;
+            font-weight: 600;
+            font-size: 15px;
+            color: #ffffff;
+        }
+
+        .cover_table_button_back:hover {
+            background: #999;
+            color: black;
+        }
+
+        .cover_table_userid label,
+        .cover_table_user_name label,
+        .cover_table_email label,
+        .cover_table_phone label,
+        .cover_table_update_image label {
+            font-size: 20px;
+            width: 300px;
+            height: 25px;
+
+        }
+
+        .cover_table_user_name input,
+        .cover_table_userid input,
+        .cover_table_email input,
+        .cover_table_phone input {
+            font-size: 16px;
+            width: 300px;
+            height: 25px;
+        }
+
+        .cover_table_update_image input {
+            width: 300px;
+        }
+    </style>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="@{/rd/index}">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="@{/rd/home}" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="@{/rd/work_list}" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">work list</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="@{/rd/member}" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="title">member</span>
+                </a>
+            </li>
+
+            <li class="food" onclick="pass_value()">
+                <a th:href="@{/rd/food}" class="food-a">
+                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                    <span class="title">food</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <div class="users">
+                <img th:src="*{headShot}">
+            </div>
+        </div>
+
+        <div id="center" class="page-center">
+            <div class="center-box">
+                <div style="width: 95%;height: 100%; overflow: auto;">
+                    <div>
+                        <h1 style="margin-bottom: 30px">new_page_2</h1>
+
+                        <!--                        <form method="post" enctype="multipart/form-data" id="upload_form">-->
+                        <!--                            <input type="file" name="files">-->
+                        <!--                            <button type="submit" value="Submit" id="btnSubmit">上傳檔案</button>-->
+                        <!--                        </form>-->
+                    </div>
+
+                    <div class="table-container">
+                        <table class="users-table">
+                            <thead id="table-thead">
+                            </thead>
+
+                            <tbody id="table-center">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="test"></div>
+
+<!--                    <div>-->
+<!--                        <a class="addNewUser" onclick="show_cover()">+</a>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <form method="post" enctype="multipart/form-data" id="upload_form">
+<!--        <input id="id" type="hidden">-->
+        <div class="cover">
+            <div class="cover-center">
+                <div class="cover_table_userid">
+                    <label class="cover_table_label">User id:</label>
+                    <input id="id" class="cover_table_input" type="text" placeholder="users id" readonly="readonly">
+                </div>
+
+                <div class="cover_table_user_name">
+                    <label class="cover_table_label">User Name:</label>
+                    <input id="user_name" class="cover_table_input" type="text" placeholder="password" readonly="readonly">
+                </div>
+
+                <div class="cover_table_email">
+                    <label class="cover_table_label">E-Mail:</label>
+
+                    <input id="email" class="cover_table_input abc" readonly="readonly">
+                </div>
+
+                <div class="cover_table_phone">
+                    <label class="cover_table_label">Phone:</label>
+                    <input id="phone" class="cover_table_input" type="text" readonly="readonly" placeholder="0912-345-678" pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" required>
+                </div>
+
+<!--                <div class="cover_table_update_image">-->
+<!--                    <label class="cover_table_label">head shot:</label>-->
+<!--                    <input name="files" class="cover_table_input" type="file">-->
+<!--                </div>-->
+
+                <div class="cover_table_button" id="close_btn">
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/rd/rd_member_config.js"></script>
+<script src="/js/rd/rd_member_manager.js"></script>
+<script src="/js/rd/rd_member_user.js"></script>
+<script src="/js/content_page_rd.js"></script>
+<script>
+    
+    $.ajax({
+        type:'GET',
+        url:'/rd/member/is_manager',
+        async:false,
+        success:function (is_manager){
+            if(is_manager){
+                console.log("1")
+                show_manager_member_center();
+            }else{
+                console.log("2")
+                show_user_member_center();
+            }
+        },
+        error:function (e){
+            console.log(e);
+        }
+    });
+
+</script>
+</body>
+</html>

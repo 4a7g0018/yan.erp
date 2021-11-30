@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>users-index</title>
+    <link rel="stylesheet" type="text/css" href="/css/users/index.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li onclick="pass_value()">
+                <a th:href="@{/users/index}">
+                    <span class="icon"><ion-icon name="diamond"></ion-icon></span>
+                    <span class="title">Best ERP</span>
+                </a>
+            </li>
+
+            <li class="home" onclick="pass_value()">
+                <a th:href="@{/users/home}" class="home-a">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+
+            <li class="accounting" onclick="pass_value()">
+                <a th:href="@{/users/accounting}" class="accounting-a">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon>
+                        </ion-icon></span>
+                    <span class="title">accounting</span>
+
+                </a>
+            </li>
+
+            <li class="new-page-1" onclick="pass_value()">
+                <a th:href="@{/users/new-page-1}" class="new-page-1-a">
+                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                    <span class="title">new_page_1</span>
+                </a>
+            </li>
+
+            <li class="new-page-2" onclick="pass_value()">
+                <a th:href="@{/users/new-page-2}" class="new-page-2-a">
+                    <span class="icon"><ion-icon name="add-outline"></ion-icon></span>
+                    <span class="title">new_page_2</span>
+                </a>
+            </li>
+
+            <li class="food" onclick="pass_value()">
+                <a th:href="@{/templates/gm/food}" class="food-a">
+                    <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
+                    <span class="title">food</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a  th:href="@{/logout}" class="logout">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div class="bar-toggle">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <!--search-->
+            <!--                <div class="search">-->
+            <!--                    <label>-->
+            <!--                        <input type="text" placeholder="accounting">-->
+
+            <!--                    </label>-->
+            <!--                    <div class="search-icon">-->
+            <!--                        <ion-icon name="search-outline"></ion-icon>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!-- users-->
+            <div class="users">
+                <img th:src="*{headShot}" >
+            </div>
+        </div>
+
+        <div class="page-center">
+            <div class="center-box"><h1>index page</h1></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let home_click = '';
+    let accounting_click = '';
+    ///new page
+    let new_page_1_click = '';
+    let new_page_2_click = '';
+    //new page--
+    let bar_toggle_click = window.sessionStorage.getItem('bar_toggle_click');
+
+    let bar_toggle = document.querySelector('.bar-toggle');
+    let navigation = document.querySelector('.navigation');
+    let main = document.querySelector('.main');
+    let home = document.querySelector('.home');
+    let accounting = document.querySelector('.accounting')
+    let home_a = document.querySelector('.home-a');
+    let accounting_a = document.querySelector('.accounting-a');
+    //new page
+    let new_page_1_a = document.querySelector('.new-page-1-a');
+    let new_page_2_a = document.querySelector('.new-page-2-a');
+    //new page--
+    let food = document.querySelector('.food-a');
+
+    if (bar_toggle_click === "click") {
+        navigation.classList.toggle('active');
+        main.classList.toggle('active');
+    }
+    //
+    // if (home_click === "click") {
+    //     home.classList.toggle('hovered');
+    // }
+    //
+    // if (accounting_click === 'click') {
+    //     accounting.classList.toggle('hovered');
+    // }
+    // //new page
+    // if (new_page_1_click === 'click') {
+    //     new_page_1_click.classList.toggle('hovered');
+    // }
+    //
+    // if (new_page_2_click === 'click') {
+    //     new_page_2_click.classList.toggle('hovered');
+    // }
+    // //new page--
+
+    bar_toggle.onclick = function () {
+        if (bar_toggle_click !== 'click') {
+            bar_toggle_click = 'click';
+        } else {
+            bar_toggle_click = '';
+        }
+
+        navigation.classList.toggle('active');
+        main.classList.toggle('active');
+    }
+
+    home_a.onclick = function () {
+        home_click = 'click';
+        accounting_click = '';
+        new_page_1_click = '';
+        new_page_2_click = '';
+        food = '';
+    }
+
+    accounting_a.onclick = function () {
+        home_click = '';
+        accounting_click = 'click';
+        new_page_1_click = '';
+        new_page_2_click = '';
+        food = '';
+    }
+
+    //new page
+    new_page_1_a.onclick = function () {
+        home_click = '';
+        accounting_click = '';
+        new_page_1_click = 'click';
+        new_page_2_click = '';
+        food = '';
+    }
+
+    new_page_2_a.onclick = function () {
+        home_click = '';
+        accounting_click = '';
+        new_page_1_click = '';
+        new_page_2_click = 'click';
+        food = '';
+    }
+
+    food.onclick = function () {
+        home_click = '';
+        accounting_click = '';
+        new_page_1_click = '';
+        new_page_2_click = '';
+        food = 'click';
+    }
+
+    //new page--
+
+    function pass_value() {
+        window.sessionStorage.setItem("home_click", home_click);
+        window.sessionStorage.setItem("accounting_click", accounting_click);
+        window.sessionStorage.setItem("bar_toggle_click", bar_toggle_click);
+
+        //new page
+        window.sessionStorage.setItem("new_page_1_click", new_page_1_click);
+        window.sessionStorage.setItem("new_page_2_click", new_page_2_click);
+        window.sessionStorage.setItem("food", food);
+        //new page--
+    }
+</script>
+</body>
+</html>
