@@ -46,7 +46,7 @@ _底下有詳細說明_
 |財務部員工(FD-USER)| | | O | |O |
 
 ---
-###功能詳細說明-總經理
+### 功能詳細說明-總經理
 
 **首頁** - 可觀看所有部門公告內容與公告發送。
 - ![](https://github.com/4a7g0018/yan.erp/blob/master/images/GM_index.gif)
@@ -63,7 +63,7 @@ _底下有詳細說明_
 **部門員工頁面** - 總經理與人資部門皆具有修改、新增員工權限，其餘部門接只能觀看到聯絡資料。
 - ![](https://github.com/4a7g0018/yan.erp/blob/master/images/GM_Member.gif)
 
-###部門經理-以財務部門為例
+### 部門經理-以財務部門為例
 **首頁** - 可一覽該部門工作完成度與新增、觀看公告(部門經理、員工只能看見該部門公告與總經理公告，只有總經理有權限跨部門查看)
  - ![](https://github.com/4a7g0018/yan.erp/blob/master/images/FD_Home.gif)
 
